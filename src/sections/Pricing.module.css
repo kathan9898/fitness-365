@@ -13,12 +13,15 @@
     text-align: center;
     transition: transform 0.3s;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .popular {
     border-color: var(--color-primary);
     background: linear-gradient(to bottom, rgba(204, 255, 0, 0.05), var(--color-bg-card));
-    transform: scale(1.05);
+    transform: scale(1.02);
     z-index: 1;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
 }
@@ -41,14 +44,14 @@
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--color-white);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .price {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 800;
     color: var(--color-white);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
     font-family: var(--font-heading);
 }
 
@@ -58,33 +61,57 @@
     font-weight: 400;
 }
 
+.target {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.description {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    min-height: 42px;
+}
+
 .features {
-    margin: 2rem 0;
+    margin: 1rem 0 2rem;
     text-align: left;
+    flex-grow: 1;
 }
 
 .feature {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.75rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     color: var(--color-text);
     font-size: 0.95rem;
+    line-height: 1.4;
 }
 
 .feature svg {
     color: var(--color-primary);
     flex-shrink: 0;
+    margin-top: 3px;
 }
 
 .note {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: var(--color-text-muted);
     margin-top: 1rem;
+    opacity: 0.7;
 }
 
 @media (min-width: 1024px) {
     .grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .popular {
+        transform: scale(1.05);
     }
 }

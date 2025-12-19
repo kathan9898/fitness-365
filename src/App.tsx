@@ -13,7 +13,13 @@ import FAQ from './sections/FAQ';
 import Footer from './components/Footer';
 import MobileCTA from './components/MobileCTA';
 
+import { initEmailJS } from './utils/emailjs';
+
 function App() {
+  React.useEffect(() => {
+    initEmailJS();
+  }, []);
+
   return (
     <LeadModalProvider>
       <div className="app">

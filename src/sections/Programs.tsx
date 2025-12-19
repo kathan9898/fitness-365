@@ -4,41 +4,22 @@ import Section from '../components/Section';
 import Modal from '../components/Modal';
 import Button from '../components/Button';
 import styles from './Programs.module.css';
-
-const programs = [
-    {
-        id: 1,
-        title: 'Transformation 12',
-        tag: '12 Weeks',
-        image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1470&auto=format&fit=crop',
-        description: 'A complete body recomposition program designed to shed fat and build lean muscle.',
-        details: 'Our signature 12-week program includes 3x weekly small group training, personalized nutrition planning, and weekly check-ins. Perfect for those looking for a serious lifestyle change.'
-    },
-    {
-        id: 2,
-        title: 'Strength 365',
-        tag: 'Ongoing',
-        image: 'https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1470&auto=format&fit=crop',
-        description: 'Focus on the big three lifts and functional strength in a supportive team environment.',
-        details: 'Join the strongest community in town. We focus on Squat, Bench, and Deadlift progression with accessory work to keep you balanced and injury-free.'
-    },
-    {
-        id: 3,
-        title: 'Athlete Conditioning',
-        tag: 'High Intensity',
-        image: 'https://images.unsplash.com/photo-1517963879466-e1b54ebd5914?q=80&w=1470&auto=format&fit=crop',
-        description: 'Sports-specific conditioning to improve speed, agility, and explosive power.',
-        details: 'Whether you are an off-season athlete or just want to train like one, this program pushes your aerobic and anaerobic systems to the limit.'
-    }
-];
+import { PROGRAMS } from '../data/programs';
+import { useLeadModal } from '../context/LeadModalContext';
 
 const Programs: React.FC = () => {
-    const [selectedProgram, setSelectedProgram] = useState<typeof programs[0] | null>(null);
+    const [selectedProgram, setSelectedProgram] = useState<typeof PROGRAMS[0] | null>(null);
+    const { openModal } = useLeadModal();
+
+    const handleInterested = () => {
+        setSelectedProgram(null);
+        openModal();
+    };
 
     return (
-        <Section id="programs" title="Signature Programs" subtitle="Train With Purpose">
+        <Section id="programs" title="Our Programs" subtitle="Train With Purpose">
             <div className={styles.grid}>
-                {programs.map((program) => (
+                {PROGRAMS.map((program) => (
                     <div
                         key={program.id}
                         className={styles.programCard}
@@ -74,8 +55,8 @@ const Programs: React.FC = () => {
                         <p style={{ color: 'var(--color-text)', marginBottom: '1.5rem', lineHeight: '1.7' }}>
                             {selectedProgram.details}
                         </p>
-                        <Button fullWidth onClick={() => setSelectedProgram(null)}>
-                            Interested? Contact Us
+                        <Button fullWidth onClick={handleInterested}>
+                            Interested? Book a Trial
                         </Button>
                     </div>
                 )}

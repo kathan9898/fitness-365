@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FiCheckCircle } from 'react-icons/fi';
+import { FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import Button from './Button';
 import styles from './LeadForm.module.css';
-
-interface LeadFormData {
-    fullName: string;
-    email: string;
-    phone: string;
-    goal: string;
-    preferredTime: string;
-    message: string;
-}
+import { sendLeadEmail, type EmailData } from '../utils/emailjs';
 
 const LeadForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm<LeadFormData>();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<EmailData>();
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    const onSubmit = (data: LeadFormData) => {
-        console.log(data);
-        // Simulate API call
-        setTimeout(() => {
+    const onSubmit = async (data: EmailData) => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            await sendLeadEmail(data);
             setIsSubmitted(true);
+            reset();
             if (onSuccess) onSuccess();
-        }, 1000);
+        } catch (err) {
+            setError('Something went wrong. Please try again or contact us directly.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     if (isSubmitted) {
@@ -34,20 +34,29 @@ const LeadForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
                 <p className={styles.successText}>
                     We've received your request. A coach will reach out to you within 24 hours to schedule your trial.
                 </p>
+                <Button variant="outline" size="sm" onClick={() => setIsSubmitted(false)} style={{ marginTop: '1rem' }}>
+                    Send Another
+                </Button>
             </div>
         );
     }
 
     return (
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            {error && (
+                <div style={{ color: '#ff4d4d', display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255, 77, 77, 0.1)', padding: '0.75rem', borderRadius: '4px' }}>
+                    <FiAlertCircle /> {error}
+                </div>
+            )}
+
             <div className={styles.formGroup}>
                 <label className={styles.label}>Full Name</label>
                 <input
-                    {...register('fullName', { required: 'Name is required' })}
+                    {...register('full_name', { required: 'Name is required' })}
                     className={styles.input}
                     placeholder="John Doe"
                 />
-                {errors.fullName && <span className={styles.error}>{errors.fullName.message}</span>}
+                {errors.full_name && <span className={styles.error}>{errors.full_name.message}</span>}
             </div>
 
             <div className={styles.formGroup}>
@@ -68,7 +77,7 @@ const LeadForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
                 <input
                     {...register('phone', { required: 'Phone is required' })}
                     className={styles.input}
-                    placeholder="(555) 123-4567"
+                    placeholder="+91 98765 43210"
                 />
                 {errors.phone && <span className={styles.error}>{errors.phone.message}</span>}
             </div>
@@ -79,7 +88,9 @@ const LeadForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
                     <option value="">Select a goal...</option>
                     <option value="strength">Build Strength</option>
                     <option value="weight_loss">Weight Loss</option>
-                    <option value="endurance">Endurance/Cardio</option>
+                    <option value="muscle_gain">Muscle Gain</option>
+                    <option value="zumba">Zumba / Dance</option>
+                    <option value="yoga">Yoga / Mobility</option>
                     <option value="general">General Health</option>
                 </select>
                 {errors.goal && <span className={styles.error}>{errors.goal.message}</span>}
@@ -87,7 +98,7 @@ const LeadForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
 
             <div className={styles.formGroup}>
                 <label className={styles.label}>Preferred Time</label>
-                <select {...register('preferredTime')} className={styles.select}>
+                <select {...register('preferred_time')} className={styles.select}>
                     <option value="morning">Morning (5AM - 9AM)</option>
                     <option value="afternoon">Afternoon (12PM - 4PM)</option>
                     <option value="evening">Evening (5PM - 9PM)</option>
@@ -103,8 +114,8 @@ const LeadForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
                 />
             </div>
 
-            <Button type="submit" fullWidth size="lg">
-                Book Free Trial
+            <Button type="submit" fullWidth size="lg" disabled={isLoading}>
+                {isLoading ? 'Sending...' : 'Book Free Trial'}
             </Button>
         </form>
     );
