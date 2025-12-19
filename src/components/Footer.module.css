@@ -1,0 +1,80 @@
+.footer {
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-border);
+    padding: 4rem 0 2rem;
+    color: var(--color-text-muted);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.brand h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.brand p {
+    max-width: 300px;
+    line-height: 1.6;
+}
+
+.column h3 {
+    color: var(--color-white);
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.links a:hover {
+    color: var(--color-primary);
+}
+
+.newsletterForm {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border);
+    padding: 0.75rem;
+    border-radius: 4px;
+    color: var(--color-white);
+    flex: 1;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.bottom {
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    }
+
+    .bottom {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

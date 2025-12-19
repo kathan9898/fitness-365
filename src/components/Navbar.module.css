@@ -1,0 +1,128 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    z-index: 100;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.scrolled {
+    background-color: rgba(5, 5, 5, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo span {
+    color: var(--color-primary);
+}
+
+.desktopNav {
+    display: none;
+}
+
+.navLinks {
+    display: flex;
+    gap: 2rem;
+}
+
+.navLink {
+    color: var(--color-text);
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+}
+
+.navLink:hover {
+    color: var(--color-white);
+}
+
+.navLink::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+.navLink:hover::after {
+    width: 100%;
+}
+
+.mobileToggle {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--color-white);
+    z-index: 101;
+}
+
+.mobileMenu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 99;
+}
+
+.mobileMenuOpen {
+    transform: translateX(0);
+}
+
+.mobileLink {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-white);
+}
+
+.mobileLink:hover {
+    color: var(--color-primary);
+}
+
+@media (min-width: 1024px) {
+    .desktopNav {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+    }
+
+    .mobileToggle {
+        display: none;
+    }
+
+    .mobileMenu {
+        display: none;
+    }
+}

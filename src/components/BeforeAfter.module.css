@@ -1,0 +1,81 @@
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: col-resize;
+    margin: 0 auto;
+}
+
+.image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: col-resize;
+    z-index: 10;
+    margin: 0;
+}
+
+.handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-white);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.handle::after {
+    content: '< >';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--color-white);
+    color: var(--color-bg);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.label {
+    position: absolute;
+    bottom: 1rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--color-white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 6;
+}
+
+.labelBefore {
+    left: 1rem;
+}
+
+.labelAfter {
+    right: 1rem;
+}
