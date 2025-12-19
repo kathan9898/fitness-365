@@ -6,6 +6,8 @@ import { BUSINESS_INFO, SOCIAL_LINKS } from '../data/business';
 
 import { sendLeadEmail } from '../utils/emailjs';
 
+import logo from '../assets/logo.png';
+
 const Footer: React.FC = () => {
     const [email, setEmail] = React.useState('');
     const [status, setStatus] = React.useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -41,7 +43,7 @@ const Footer: React.FC = () => {
             <div className="container">
                 <div className={styles.grid}>
                     <div className={styles.brand}>
-                        <h2><span>F</span>365</h2>
+                        <img src={logo} alt="Fitness 365" style={{ height: '60px', marginBottom: '1rem', borderRadius: '50%' }} />
                         <p>
                             Premium strength and conditioning facility dedicated to your progress.
                             Join the community that pushes you further.

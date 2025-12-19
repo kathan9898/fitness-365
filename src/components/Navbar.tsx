@@ -13,6 +13,8 @@ const navLinks = [
     { name: 'Results', href: '#results' },
 ];
 
+import logo from '../assets/logo.png';
+
 const Navbar: React.FC = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -32,7 +34,7 @@ const Navbar: React.FC = () => {
         <header className={clsx(styles.header, isScrolled && styles.scrolled)}>
             <div className={clsx('container', styles.navContainer)}>
                 <a href="#" className={styles.logo}>
-                    <span>F</span>365
+                    <img src={logo} alt="Fitness 365" style={{ height: '50px', borderRadius: '50%' }} />
                 </a>
 
                 {/* Desktop Nav */}
