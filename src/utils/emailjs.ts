@@ -31,18 +31,27 @@ export const sendLeadEmail = async (data: EmailData) => {
     }
 
     try {
+        console.log('Sending email with data:', data);
         const response = await emailjs.send(
             serviceId,
             templateId,
             {
                 to_name: 'Fitness 365 Owner',
+
+                // Name variations to catch any template mismatch
+                full_name: data.full_name,
                 from_name: data.full_name,
+                name: data.full_name,
+
+                // Email variations
+                email: data.email,
                 from_email: data.email,
+                reply_to: data.email,
+
                 phone: data.phone,
                 goal: data.goal,
                 preferred_time: data.preferred_time,
                 message: data.message,
-                reply_to: data.email,
             },
             publicKey
         );
