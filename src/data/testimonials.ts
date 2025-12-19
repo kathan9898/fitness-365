@@ -1,18 +1,18 @@
 export const TESTIMONIALS = [
     {
         quote: "The best gym in Chandlodia. The equipment is top-notch and the trainers are very helpful.",
-        author: "Local Member",
-        initials: "LM"
+        author: "Kathan Patel",
+        initials: "KP"
     },
     {
         quote: "I love the Zumba classes here. Great energy and a wonderful community feel.",
-        author: "Happy Member",
-        initials: "HM"
+        author: "Manan Patel",
+        initials: "MP"
     },
     {
         quote: "Clean facility, good vibes, and affordable yearly plans. Highly recommended.",
-        author: "Fitness Enthusiast",
-        initials: "FE"
+        author: "Nikunj Mevada",
+        initials: "NM"
     }
 ];
 

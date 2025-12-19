@@ -72,12 +72,6 @@ const Hero: React.FC = () => {
                 </motion.div>
             </div>
 
-            <div className={styles.scrollIndicator}>
-                <div className={styles.mouse}>
-                    <div className={styles.wheel} />
-                </div>
-                <span>Scroll</span>
-            </div>
         </section>
     );
 };
